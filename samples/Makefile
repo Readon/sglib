@@ -1,51 +1,49 @@
-runall: arraysort arraysort1 arraybinsearch listsort \
-        listinsertsort listinsertsort1 rbtree dllist \
-        hash \
-        selftest clean
 
+CFLAGS	+= -I..
 
-arraysort: arraysort.c ../sglib.h
-	gcc -I.. arraysort.c
-	a.out 6 7 3 4 1 4 1 3 5
+target-y = \
+	arraysort \
+	arraysort1 \
+	arraybinsearch \
+	listsort \
+	listinsertsort \
+	listinsertsort1 \
+	rbtree \
+	dllist \
+	hash \
+	selftest
 
-arraysort1: arraysort1.c ../sglib.h
-	gcc -I.. arraysort1.c
-	a.out 6 7 3 4 1 4 1 3 5
+arraysort_files-y = arraysort.c
 
-arraybinsearch: arraybinsearch.c ../sglib.h
-	gcc -I.. arraybinsearch.c
-	a.out 6 7 3 4 1 4 1 3 5
+arraysort1_files-y = arraysort1.c
 
-listsort: listsort.c ../sglib.h
-	gcc -I.. listsort.c
-	a.out 6 7 3 4 1 4 1 3 5
+arraybinsearch_files-y = arraybinsearch.c
 
-dllist: dllist.c ../sglib.h
-	gcc -I.. dllist.c
-	a.out 6 7 3 4 1 4 1 3 5
+listsort_files-y = listsort.c
 
-hash: hash.c ../sglib.h
-	gcc -I.. hash.c
-	a.out  1 3 1 5 2 3 1 7 11 33 11
+dllist_files-y = dllist.c
 
-listinsertsort: listinsertsort.c ../sglib.h
-	gcc -I.. listinsertsort.c
-	a.out 6 7 3 4 1 4 1 3 5
+hash_files-y = hash.c
 
-listinsertsort1: listinsertsort1.c ../sglib.h
-	gcc -I.. listinsertsort1.c
-	a.out 6 7 3 4 1 4 1 3 5
+listinsertsort_files-y = listinsertsort.c
 
-rbtree: rbtree.c ../sglib.h
-	gcc -I.. rbtree.c
-	a.out 6 7 3 4 1 4 1 3 5
+listinsertsort1_files-y = listinsertsort1.c
 
+rbtree_files-y = rbtree.c
 
-selftest: selftest.c ../sglib.h
-	gcc -I.. -O selftest.c
-	a.out
-	echo Done.
+selftest_files-y = selftest.c
 
-clean:;
-	rm -f a.out
+tests: all
+	./arraysort 6 7 3 4 1 4 1 3 5
+	./arraysort1 6 7 3 4 1 4 1 3 5
+	./arraybinsearch 6 7 3 4 1 4 1 3 5
+	./listsort 6 7 3 4 1 4 1 3 5
+	./dllist 6 7 3 4 1 4 1 3 5
+	./hash 1 3 5 2 3 1 7 11 33 11
+	./listinsertsort 6 7 3 4 1 4 1 3 5
+	./listinsertsort1 6 7 3 4 1 4 1 3 5
+	./rbtree 6 7 3 4 1 4 1 3 5
+	./selftest
+	@echo Done
 
+include Makefile.lib
