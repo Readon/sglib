@@ -20,7 +20,7 @@ struct ilist {
 
 int main(int argc, char **argv) {
   int i,a;
-  struct ilist *l, *the_list, *ll;
+  struct ilist *l, *the_list;
   the_list = NULL;
   for (i=1; i<argc; i++) {
     sscanf(argv[i],"%d", &a);

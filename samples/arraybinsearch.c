@@ -14,8 +14,9 @@
 #define MAX_ELEMS 1000
 
 int main(int argc, char **argv) {
-  int i, size, found, index, tmp;
+  int i, size, found, index = 0, tmp;
   int a[MAX_ELEMS];
+  (void) found;
   size = argc-1;
   for (i=0; i<size; i++) {
     sscanf(argv[i+1],"%d", &a[i]);

@@ -19,7 +19,7 @@ int counts[ORDER];
 int check_counts[ORDER];
 
 struct MyIntList {
-  unsigned 			n;
+  int 			n;
   struct MyIntList 	*next;
 
   // double linked list supplement
@@ -242,7 +242,7 @@ void check_double_linked_list_consistency(DoubleLinkedList *l) {
 void array_quick_sort_test() {
 	int a[ORDER];
 	int b[ORDER];
-	int i,pass;
+	int i;
 	//srandom(seed);
 	generate_values();
 	for(i=0; i<ORDER; i++) {
@@ -268,7 +268,7 @@ void array_quick_sort_test() {
 void array_heap_sort_test() {
 	int a[ORDER];
 	int b[ORDER];
-	int i,pass;
+	int i;
 	//srandom(seed);
 	generate_values();
 	for(i=0; i<ORDER; i++) {
@@ -292,8 +292,7 @@ void array_heap_sort_test() {
 }
 
 void list_sort_test() {
-	int 		a[ORDER];
-	int 		i,pass;
+	int 		i;
 	SortedList	*list, *elem, *l, *lnext;
 	//srandom(seed);
 	generate_values();
@@ -328,11 +327,11 @@ void list_sort_test() {
 /////////////////////////////////////////////////////////////////////////////////////////
 
 void list_test() {
-	int i, len, cc, cc5, r;
+	int i, cc, cc5, r;
 	int a[ORDER];
 	int b[ORDER];
-	struct MyIntList *list, *list2, *l, *ll, *t;
-	struct MyIntList *e, *e2, te, *memb, *memb2, *_current_element_;
+	struct MyIntList *list, *list2, *ll;
+	struct MyIntList *e, *e2, te, *memb, *memb2;
 	struct sglib_SimpleList_iterator	it;
 
 	//srandom(seed);
@@ -448,9 +447,11 @@ void list_test() {
 	assert(list!=NULL);
 	ll = NULL; cc = cc5 = 0;
 	SGLIB_LIST_MAP_ON_ELEMENTS(SimpleList, list, _current_element_, next, {
-	  if (cc==0) ll = sglib_SimpleList_it_init(&it, list);
-	  assert(ll==_current_element_);
-	  cc ++;
+	  if (cc==0) {
+	  	ll = sglib_SimpleList_it_init(&it, list);
+	  	assert(ll==_current_element_);
+	  	cc ++;
+		}
 	  if (ll!=NULL && ll->n == ITERATOR_EQ_CHECK_VALUE) cc5 ++;
 	  ll =  sglib_SimpleList_it_next(&it);
 	});
@@ -485,7 +486,7 @@ void list_test() {
 /////////////////////////////////////////////////////////////////////////////////////////
 
 void hashed_list_test() {
-	int i, len, cc, cc5;
+	int i, cc, cc5;
 	int a[ORDER];
 	int b[ORDER];
 	struct MyIntList *htab[HASH_TAB_DIM];
@@ -593,10 +594,10 @@ void hashed_list_test() {
 /////////////////////////////////////////////////////////////////////////////////////////
 
 void double_linked_list_test() {
-	int i, len, cc, cc5, r;
+	int i, cc, cc5, r;
 	int a[ORDER];
 	int b[ORDER];
-	struct MyIntList	*list, *list2, *list3, *list4, *l, *ll, *l2, *l3, *l4, *t, *e, *e2, te, *memb, *memb2, *_current_element_;
+	struct MyIntList	*list, *list2, *list3, *list4, *l, *ll, *l2, *l3, *l4, *e, *e2, te, *memb, *memb2;
 	struct sglib_DoubleLinkedList_iterator it;
 
 
@@ -826,11 +827,10 @@ void double_linked_list_test() {
 /////////////////////////////////////////////////////////////////////////////////////////
 
 void sorted_list_test() {
-	int i, len, cc, cc5, r;
+	int i, cc, cc5, r;
 	int a[ORDER];
 	int b[ORDER];
-	struct MyIntList	*list, *list2, *l, *ll, *e, te, *memb, *memb2;
-	SimpleList *el;
+	struct MyIntList	*list, *list2, *ll, *e, te, *memb, *memb2;
 	struct sglib_SortedList_iterator it;
 
 	//srandom(seed);
@@ -931,9 +931,11 @@ void sorted_list_test() {
 	assert(list!=NULL);
 	ll = NULL; cc = cc5 = 0;
 	SGLIB_SORTED_LIST_MAP_ON_ELEMENTS(SortedList, list, _current_element_, next, {
-	  if (cc==0) ll = sglib_SortedList_it_init(&it, list);
-	  assert(ll==_current_element_);
-	  cc ++;
+	  if (cc==0) {
+	  	ll = sglib_SortedList_it_init(&it, list);
+	  	assert(ll==_current_element_);
+	  	cc ++;
+		}
 	  if (ll!=NULL && ll->n == ITERATOR_EQ_CHECK_VALUE) cc5 ++;
 	  ll =  sglib_SortedList_it_next(&it);
 	});
@@ -989,10 +991,10 @@ void sglib_Tree_dump(Tree *t) {
 }
 
 void rbtree_test() {
-	int							i,j,k,r,n;
+	int							i,r,n;
 	int 						a[ORDER];
 	int 						b[ORDER];
-	Tree						*tree, *e, te, *memb, *memb2, *me, *t, tt;
+	Tree						*tree, *e, te, *memb, *memb2, *t, tt;
 	SimpleList					*list, *l;
 	struct sglib_Tree_iterator	it;
 	//srandom(seed);

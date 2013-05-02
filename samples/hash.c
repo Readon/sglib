@@ -31,7 +31,7 @@ SGLIB_DEFINE_HASHED_CONTAINER_PROTOTYPES(ilist, HASH_TAB_SIZE, ilist_hash_functi
 SGLIB_DEFINE_HASHED_CONTAINER_FUNCTIONS(ilist, HASH_TAB_SIZE, ilist_hash_function)
 
 int main(int argc, char **argv) {
-  int                                   i, ai,aj, n;
+  int                                   i, n;
   struct ilist                          ii, *nn, *ll;
   struct sglib_hashed_ilist_iterator    it;
 
